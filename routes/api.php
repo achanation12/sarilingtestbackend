@@ -31,7 +31,7 @@ Route::post('/checkout', function (Request $request) {
     foreach ($request->items as $item) {
         $product = Product::where('id', $item['id'])->first();
         if ($product) {
-            $totalPrice += $product->price * $item['qty'];
+            $totalPrice += $product->price * $item['quantity'];
         }
     }
     $transactionParams = [
@@ -48,7 +48,7 @@ Route::post('/checkout', function (Request $request) {
             'transaction_id' => $tranaction->id,
             'product_id' => $product->id,
             'price' => $product->price,
-            'quantity' => $item['qty'],
+            'quantity' => $item['quantity'],
         ]);
     }
 
