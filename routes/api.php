@@ -37,6 +37,9 @@ Route::post('/checkout', function (Request $request) {
     $transactionParams = [
         'total_price' => $totalPrice,
     ];
+    if($totalPrice == 0){
+        return response()->json(['message' => 'Tidak ada produk yang dibeli!', 'total_price' => $totalPrice], 400);
+    }
     $tranaction = Transaction::create($transactionParams);
 
     foreach ($request->items as $item) {
